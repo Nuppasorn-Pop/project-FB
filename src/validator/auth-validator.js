@@ -8,7 +8,11 @@ exports.registerSchema = Joi.object({
     Joi.string().pattern(/^[0-9]{10}$/),
   ]).strip(),
   password: Joi.string().required().pattern(new RegExp("^[0-9a-zA-Z]{5,}$")),
-  confirmPassword: Joi.string().required().valid(Joi.ref("password")).strip(),
+  confirmPassword: Joi.string()
+    .required()
+    .valid(Joi.ref("password"))
+    .required()
+    .strip(),
   // ถ้า confirm password ตรงกับ password มันจะ strip() confirmPassword ให้  เพราะ backend ไม่ได้นำไปใช้ต่อ ใช้แต่ password
 
   // Validate and sanitize data

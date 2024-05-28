@@ -5,7 +5,7 @@ const errorMiddleware = require("./middleware/error");
 const notFoundMiddleware = require("./middleware/not-found");
 const morgan = require("morgan");
 const limiter = require("./middleware/rate-limit");
-const { default: authRouter } = require("./routes/auth-route");
+const authRouter = require("./routes/auth-route");
 
 const app = express();
 

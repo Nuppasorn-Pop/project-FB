@@ -26,6 +26,11 @@ exports.registerSchema = Joi.object({
   }),
 });
 
+exports.loginSchema = Joi.object({
+  emailOrMobile: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
 // -------------------------------------- test joi -------------------------------------------
 // const test = {
 //   firstName: "df4sd5f4ds5f",

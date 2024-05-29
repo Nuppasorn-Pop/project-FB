@@ -1,12 +1,16 @@
 const prisma = require("../models/prisma");
-const userServicr = {};
+const userService = {};
 
-userServicr.createUser = (data) => prisma.user.create({ data });
-userServicr.findUserByEmailOrMobile = (emailOrMobile) =>
+userService.createUser = (data) => prisma.user.create({ data });
+userService.findUserByEmailOrMobile = (emailOrMobile) =>
   prisma.user.findFirst({
     where: {
       OR: [{ email: emailOrMobile }, { mobile: emailOrMobile }],
     },
   });
 
-module.exports = userServicr;
+// chceck user ที่ login by id
+userService.findUserById = (userId) =>
+  prisma.user.findUnique({ where: { id: userId } });
+
+module.exports = userService;

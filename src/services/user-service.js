@@ -13,4 +13,8 @@ userService.findUserByEmailOrMobile = (emailOrMobile) =>
 userService.findUserById = (userId) =>
   prisma.user.findUnique({ where: { id: userId } });
 
+// update user by id
+userService.updateUserById = (data, userId) =>
+  prisma.user.update({ where: { id: userId }, data });
+
 module.exports = userService;

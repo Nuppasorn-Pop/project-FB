@@ -6,6 +6,8 @@ const notFoundMiddleware = require("./middleware/not-found");
 const morgan = require("morgan");
 const limiter = require("./middleware/rate-limit");
 const authRouter = require("./routes/auth-route");
+const userRouter = require("./routes/user.route");
+const authenticate = require("./middleware/authenticate");
 
 const app = express();
 
@@ -14,6 +16,7 @@ app.use(morgan("dev")); // ช่วยในการ debug code ได้เ�
 app.use(limiter); // จำกัดจำนวนผู้ใช้งาน
 app.use(express.json());
 app.use("/auth", authRouter);
+app.use("/user", authenticate, userRouter);
 
 app.use(errorMiddleware);
 app.use(notFoundMiddleware);

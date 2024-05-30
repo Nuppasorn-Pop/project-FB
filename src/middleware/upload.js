@@ -1,3 +1,4 @@
+// upload รูปโปรไฟล์ ที่หน้า browser ==> Edit Profile
 const multer = require("multer");
 const strorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -9,3 +10,7 @@ const strorage = multer.diskStorage({
     cb(null);
   },
 });
+
+const upload = multer({ strorage }); // บอก multer ว่าจะเก็บ file ที่ strorage นี้
+
+module.exports = upload;

@@ -29,3 +29,16 @@ RESPONSE
     400 message
     401 message
     500 message
+
+ --- upload profile image or cover image
+ path /users
+HEADER
+  Authorization Bearer access_token
+BODY (multipart/form-data)
+  profileImage
+  coverImage
+RESPONSE
+  200 ส่ง Link ของ profileImage, coverImage
+  400 message
+  401 message (token มีปัญหา)
+  500 message

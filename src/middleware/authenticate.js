@@ -20,7 +20,7 @@ const authenticate = async (req, res, next) => {
     if (!user) {
       createError({
         message: "user was not found",
-        statusCode: 400,
+        statusCode: 401,
       });
     }
 

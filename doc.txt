@@ -40,5 +40,27 @@ BODY (multipart/form-data)
 RESPONSE
   200 ส่ง Link ของ profileImage, coverImage
   400 message
-  401 message (token มีปัญหา)
+  401 message (token มีปัญหา ==> unAuthenticate)
   500 message
+
+--- get user profile
+GET /users/:profileId
+HEADER
+  Authorization Bearer access_token
+RESPONSE
+  200 profileUser
+  400 message (หา profileId ไม่เจอ)
+  401 message
+  500 message
+
+-- request friend
+POST /relationships/users/:receiverId
+HEADER 
+  Authorization Bearer access_token
+RESPONSE 
+  200 message
+  400 message (หา receiverId ไม่เจอ)
+  401 message
+  500 message
+
+-- cancel request friend

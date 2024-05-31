@@ -9,7 +9,6 @@ userService.findUserByEmailOrMobile = (emailOrMobile) =>
     },
   });
 
-// chceck user ที่ login by id
 userService.findUserById = (userId) =>
   prisma.user.findUnique({ where: { id: userId } });
 

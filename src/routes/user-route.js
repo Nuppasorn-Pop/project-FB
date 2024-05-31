@@ -16,6 +16,8 @@ userRouter.patch(
   userController.updateProfileOrCoverImage
 );
 
+userRouter.get("/:profileId", userController.getProfileUser);
+
 module.exports = userRouter;
 
 // upload มี 3 mehtod โดย method มีการกำหนด key ใน req.body ว่าจะรับเฉพาะ file ที่เป็น value ของ key ที่กำหนด

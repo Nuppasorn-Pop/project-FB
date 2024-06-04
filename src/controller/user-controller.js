@@ -73,7 +73,13 @@ userController.getProfileUser = async (req, res, next) => {
         req.user.id
       );
 
-    res.status(200).json({ user: profileUser, relationShipToAuthUser });
+    const friends = await relationshipService.findFriendsByTargetUserId(
+      +req.params.profileId
+    );
+
+    res
+      .status(200)
+      .json({ user: profileUser, relationShipToAuthUser, friends });
   } catch (err) {
     next(err);
   }

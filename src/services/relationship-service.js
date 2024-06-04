@@ -3,6 +3,7 @@ const {
   RELATIONSHIP_STATUS,
   RELATIONSHIP_TO_AUTH_USER,
 } = require("../constants/index");
+const userService = require("./user-service");
 const relationshipService = {};
 
 // id:1, id:2
@@ -77,5 +78,26 @@ relationshipService.updateRelationshipById = (status, id) =>
 
 relationshipService.deleteRelationshipById = (id) =>
   prisma.relationship.delete({ where: { id } });
+
+// select * from relationship where status = "ACCEPTED" AND (senderId = 3 OR receiverId = 3)
+relationshipService.findFriendIdListByTargetUserId = async (targetId) => {
+  const relationships = await prisma.relationship.findMany({
+    where: {
+      status: RELATIONSHIP_STATUS.ACCEPTED,
+      OR: [{ senderId: targetId }, { receiverId: targetId }],
+    },
+  });
+  const friendIdList = relationships.map((el) =>
+    el.senderId === targetId ? el.receiverId : el.senderId
+  );
+  return friendIdList;
+};
+
+relationshipService.findFriendsByTargetUserId = async (targetUserId) => {
+  const friendIdList = await relationshipService.findFriendIdListByTargetUserId(
+    targetUserId
+  );
+  return userService.findUserByIdList(friendIdList);
+};
 
 module.exports = relationshipService;

@@ -1,5 +1,16 @@
 const prisma = require("../models/prisma");
 const userService = {};
+const userFiltered = {
+  id: true,
+  firstName: true,
+  lastName: true,
+  email: true,
+  mobile: true,
+  profileImage: true,
+  coverImage: true,
+  createdAt: true,
+  updatedAt: true,
+};
 
 userService.createUser = (data) => prisma.user.create({ data });
 userService.findUserByEmailOrMobile = (emailOrMobile) =>
@@ -15,5 +26,16 @@ userService.findUserById = (userId) =>
 // update user by id
 userService.updateUserById = (data, userId) =>
   prisma.user.update({ where: { id: userId }, data });
+
+userService.findUserByIdList = (idList) => {
+  return prisma.user.findMany({
+    where: {
+      id: {
+        in: idList,
+      },
+    },
+    select: userFiltered,
+  });
+};
 
 module.exports = userService;

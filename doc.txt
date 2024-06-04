@@ -70,7 +70,20 @@ PATH /relationships/user/:senderId ==> sender ส่งคำขอเป็น�
 HEADER 
   Authorization Bearer access_token ==> receiver login สามารถกด confirm request หรือ cancel request
 RESPONSE
-  200 message
+  204 message
+  400 message
+  401 message
+  500 message
+
+--- create post
+POST /posts
+HEADER
+  Authorization Bearer access_token
+BODY {multipart/formdata}
+  message
+  image
+RESPONSE
+  201 message
   400 message
   401 message
   500 message

@@ -54,4 +54,28 @@ relationshipService.createRelationship = (senderId, receiverId) =>
     },
   });
 
+relationshipService.deleteRalationshipBySenderIdRecevierIdAndStatus = (
+  senderId,
+  receiverId,
+  status
+) =>
+  prisma.relationship.deleteMany({
+    where: { senderId, receiverId, status },
+  });
+
+relationshipService.findBySenderIdRecevierIdAndStatus = (
+  senderId,
+  receiverId,
+  status
+) =>
+  prisma.relationship.findFirst({
+    where: { senderId, receiverId, status },
+  });
+
+relationshipService.updateRelationshipById = (status, id) =>
+  prisma.relationship.updateMany({ data: { status }, where: { id } });
+
+relationshipService.deleteRelationshipById = (id) =>
+  prisma.relationship.delete({ where: { id } });
+
 module.exports = relationshipService;
